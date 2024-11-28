@@ -11,28 +11,26 @@ namespace redbadger.martianrobot.game.Service
     {
         private Grid _grid;
         private Robot _robot;
-        private UserInput _userInput;
 
-        public GameService(UserInput userInput) {
-            _userInput = userInput;
-
-            // set objects
-            _grid = new Grid(userInput.gridMaxCoords);
-            _robot = new Robot(userInput.robotOriginalCoords, userInput.robotOriginalOrientation);
-            
+        public GameService(Grid grid) {
+            _grid = grid;
+            _robot = new Robot(new Coord(0, 0), Orientation.North);
         }
 
-        public void NewRobot()
+        public string NewRobot(UserInput userInput, bool showRobotPath = false)
         {
 
+            _robot = new Robot(userInput.robotOriginalCoords, userInput.robotOriginalOrientation);
+
+            return ExecuteCommands(userInput.commands, showRobotPath);
         }
 
-        private void ExecuteCommands(bool showProgress = false) {
+        private string ExecuteCommands(char[] commands, bool showRobotPath = false) {
             
-            var cmds = _userInput.commands.GetEnumerator();
-            
+            var cmds = commands.GetEnumerator();
+            Coord robotLastKnowPosition = _robot.location;
 
-            while (!_grid.RobotLost(_robot) && cmds.MoveNext())
+            while (_grid.RobotOnGrid(_robot) && cmds.MoveNext())
             {
                 switch (cmds.Current)
                 {
@@ -47,21 +45,37 @@ namespace redbadger.martianrobot.game.Service
                         _robot.MoveForward(); break;
                 }
 
-                if (showProgress) { RobotStatus(); }
+                if (!_robot.isLost)
+                {
+                    robotLastKnowPosition = _robot.location;
+                }
+
+                if (showRobotPath) { PrintRobotStatus(); }
 
             }
 
+            if (_robot.isLost)
+            {
+                _grid.AddScent(robotLastKnowPosition);
+            }
 
+            return RobotStatus();
         }
-        private void RobotStatus() {
+        private void PrintRobotStatus()
+        {
+            Console.WriteLine(RobotStatus());
+        }
+
+        protected string RobotStatus() {
             string formatterOutput = "{0} {1} {2} {3}";
 
 
-            Console.WriteLine(formatterOutput,
+            return string.Format( formatterOutput,
                         _robot.location.x,
                         _robot.location.y,
-                        _robot.orientation,
-                        _robot.isLost ? "LOST" : string.Empty);
+                        _robot.orientation.ToString().First(),
+                        _robot.isLost ? "LOST" : string.Empty
+                        ).TrimEnd();
         }
 
 

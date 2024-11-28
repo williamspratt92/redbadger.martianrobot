@@ -11,7 +11,7 @@ namespace redbadger.martianrobot.game.Model
 {
     internal struct UserInput
     {
-        public readonly Coord gridMaxCoords;
+        //public readonly Coord gridMaxCoords;
         public readonly Coord robotOriginalCoords;
         public readonly Orientation robotOriginalOrientation;
         public readonly char[] commands = Array.Empty<char>();
@@ -24,23 +24,20 @@ namespace redbadger.martianrobot.game.Model
             {
                 Console.WriteLine($"Invalid user input");
             }
-            else if (userInputs.Length < 3)
+            else if (userInputs.Length < 2)
             {
                 Console.WriteLine($"Invalid user input");
             }
 
             // validate
-            else if (!ValidateGridInput(userInputs[0], out gridMaxCoords))
+            
+            else if (!ValidateRobotInput(userInputs[0], out robotOriginalCoords, out robotOriginalOrientation))
             {
-                Console.WriteLine($"Invalid grid coords: '{userInputs[0]}'");
+                Console.WriteLine($"Invalid robot position: '{userInputs[0]}'");
             }
-            else if (!ValidateRobotInput(userInputs[1], out robotOriginalCoords, out robotOriginalOrientation))
+            else if (!ValidateCommands(userInputs[1], out commands))
             {
-                Console.WriteLine($"Invalid robot position: '{userInputs[1]}'");
-            }
-            else if (!ValidateCommands(userInputs[2], out commands))
-            {
-                Console.WriteLine($"Invalid command sequence: '{userInputs[2]}'");
+                Console.WriteLine($"Invalid command sequence: '{userInputs[1]}'");
             }
 
             // must be valid
@@ -52,7 +49,7 @@ namespace redbadger.martianrobot.game.Model
         {
             // default return type for out
             coord = new Coord(0, 0);
-            orientation = Orientation.Default;
+            orientation = Orientation.North;
 
             // null test
             if (string.IsNullOrEmpty(inputStr)) { return false; }
@@ -64,42 +61,14 @@ namespace redbadger.martianrobot.game.Model
             // can convert to int
             int[] ints = inputs.Take(2).Select(c => Convert.ToInt32(c)).ToArray();
 
-            // reuse code
-            return ValidateCoord(ints, out coord) && ValidateOrientation(inputs[2], out orientation);
-        }
-        bool ValidateGridInput(string coordStr, out Coord coord)
-        {
-            // default return type for out
-            coord = new Coord(0, 0);
-
-            // null test
-            if (string.IsNullOrEmpty(coordStr)) { return false; }
-
-            // too few test
-            string[] coords = coordStr.Split(' ');
-            if (coords.Length != 2) { return false; }
-
-            // can convert to int
-            int[] ints = coords.Select(c => Convert.ToInt32(c)).ToArray();
-
-            // reuse code
-            return ValidateCoord(ints, out coord);
-        }
-        bool ValidateCoord(int[] ints, out Coord coord)
-        {
-            // default return type for out
-            coord = new Coord(0, 0);
-
-            // not too small
-            if (ints[0] < 0 || ints[1] < 0) { return false; }
-
             // out type
             coord = new Coord(ints[0], ints[1]);
-            return true;
+            return ValidateOrientation(inputs[2], out orientation);
         }
+        
         bool ValidateOrientation(string orientationStr, out Orientation orientation)
         {
-            orientation = Orientation.Default;
+            orientation = Orientation.North;
 
             if (string.IsNullOrEmpty(orientationStr)) { return false; }
             if (orientationStr.Length != 1) { return false; }

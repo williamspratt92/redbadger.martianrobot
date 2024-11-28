@@ -16,8 +16,7 @@ namespace redbadger.martianrobot.tests
         {
             IList<string> simulatedInput = new List<string> {
                 string.Empty,
-                string.Empty,
-                string.Empty };
+                string.Empty};
 
             UserInput userInput = new UserInput(simulatedInput.ToArray());
 
@@ -27,7 +26,6 @@ namespace redbadger.martianrobot.tests
         public void MissingData()
         {
             IList<string> simulatedInput = new List<string> {
-                "5 3",
                 "0 3 W" };
 
             UserInput userInput = new UserInput(simulatedInput.ToArray());
@@ -38,7 +36,6 @@ namespace redbadger.martianrobot.tests
         public void IncorrectData()
         {
             IList<string> simulatedInput = new List<string> {
-                "5 3 7",
                 "0 D",
                 "LLFFDFLFL" };
 

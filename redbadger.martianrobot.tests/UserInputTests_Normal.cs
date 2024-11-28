@@ -1,4 +1,5 @@
 using redbadger.martianrobot.game.Model;
+using redbadger.martianrobot.game.Resources;
 
 namespace redbadger.martianrobot.tests
 {
@@ -7,36 +8,21 @@ namespace redbadger.martianrobot.tests
         [Fact]
         public void SampleInput_1()
         {
-            IList<string> simulatedInput = new List<string> {
-                "5 3",
-                "1 1 E",
-                "RFRFRFRF" };
-            
-            UserInput userInput = new UserInput(simulatedInput.ToArray());
+            UserInput userInput = new UserInput(SampleInputs.sampleInput1);
 
             Assert.True(userInput.isValid);
         }
         [Fact]
         public void SampleInput_2()
         {
-            IList<string> simulatedInput = new List<string> {
-                "5 3",
-                "3 2 N",
-                "FRRFLLFFRRFLL" };
-
-            UserInput userInput = new UserInput(simulatedInput.ToArray());
+            UserInput userInput = new UserInput(SampleInputs.sampleInput2);
 
             Assert.True(userInput.isValid);
         }
         [Fact]
         public void SampleInput_3()
         {
-            IList<string> simulatedInput = new List<string> {
-                "5 3",
-                "0 3 W",
-                "LLFFFLFLFL" };
-
-            UserInput userInput = new UserInput(simulatedInput.ToArray());
+            UserInput userInput = new UserInput(SampleInputs.sampleInput3);
 
             Assert.True(userInput.isValid);
         }

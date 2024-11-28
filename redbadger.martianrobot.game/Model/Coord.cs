@@ -11,6 +11,7 @@ namespace redbadger.martianrobot.game.Model
         public int x;
         public int y;
 
+        // TODO: validate not negative coords
         public Coord(int x, int y)
         {
             this.x = x;
