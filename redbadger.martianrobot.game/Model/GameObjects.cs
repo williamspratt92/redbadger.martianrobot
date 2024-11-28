@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace redbadger.martianrobot.game.Model
 {
 
-    internal enum Orientation { Default, North, South, East, West }
+    internal enum Orientation { North = 0, East = 1, South = 2, West = 3 }
 
     internal enum RobotMoves { Left, Right, Forward }
 }

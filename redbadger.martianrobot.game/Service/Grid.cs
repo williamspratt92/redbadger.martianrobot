@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using redbadger.martianrobot.game.Model;
@@ -19,6 +20,7 @@ namespace redbadger.martianrobot.game.Service
 
         public bool IsPositionScented(Coord coord)
         {
+            // TODO: could override GetHashCode in Coord class to use the 'List.contains' method for faster look up
             foreach (Coord scented in scentedCoords)
             {
                 if (scented.Equals(coord)) { return true; }
@@ -26,9 +28,13 @@ namespace redbadger.martianrobot.game.Service
             return false;
         }
 
+        
         public bool RobotLost(Robot robot)
         {
-            return robot.location.x > _maxBounds.x && robot.location.y > _maxBounds.y;
+            bool isLost = robot.location.x > _maxBounds.x || robot.location.y > _maxBounds.y;
+
+            if (isLost) { robot.RobotLost(); }
+            return robot.isLost;
         }
 
     }

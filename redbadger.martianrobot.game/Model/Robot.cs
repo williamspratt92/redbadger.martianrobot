@@ -8,17 +8,57 @@ namespace redbadger.martianrobot.game.Model
 {
     internal class Robot
     {
-        
+        public Coord location { get { return _location; } }
+        public Orientation orientation { get { return _orientation; } }
+        public bool isLost { get { return _isLost; } }
+
         private Coord _location = new Coord(0,0);
         private Orientation _orientation;
+        private bool _isLost = false;
 
         public Robot(Coord location, Orientation orientation) { 
             this._location = location;
             this._orientation = orientation;
         }
 
-        public void IncreaseX(int change) { _location.x += change; }
-        public void IncreaseY(int change) { _location.y += change; }
-        public void TurnLeft() { Orientation}
+        public void RobotLost() { _isLost = true; }
+
+        public void MoveForward()
+        {
+            switch (_orientation)
+            {
+                case Orientation.North:
+                    _location.y += 1; break;
+                case Orientation.South:
+                    _location.y -= 1; break;
+
+                case Orientation.East:
+                    _location.x += 1; break;
+                case Orientation.West:
+                    _location.x -= 1; break;
+
+            }
+        }
+
+        public void TurnRight() {
+
+            if (_orientation == Orientation.West) { 
+                _orientation = Orientation.North;
+                return;
+            }
+            
+            _orientation = (Orientation)((int)_orientation + 1);
+        }
+        public void TurnLeft()
+        {
+
+            if (_orientation == Orientation.North)
+            {
+                _orientation = Orientation.West;
+                return;
+            }
+
+            _orientation = (Orientation)((int)_orientation - 1);
+        }
     }
 }

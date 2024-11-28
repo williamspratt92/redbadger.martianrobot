@@ -9,15 +9,61 @@ namespace redbadger.martianrobot.game.Service
 {
     internal class GameService
     {
-        private Grid _grid = new Grid(new Coord(0,0));
-        private Robot _robot = new Robot();
+        private Grid _grid;
+        private Robot _robot;
+        private UserInput _userInput;
 
-        public GameService() {
-        }
+        public GameService(UserInput userInput) {
+            _userInput = userInput;
 
-        public void Play(UserInput userInput) {
+            // set objects
             _grid = new Grid(userInput.gridMaxCoords);
+            _robot = new Robot(userInput.robotOriginalCoords, userInput.robotOriginalOrientation);
+            
+        }
+
+        public void NewRobot()
+        {
 
         }
+
+        private void ExecuteCommands(bool showProgress = false) {
+            
+            var cmds = _userInput.commands.GetEnumerator();
+            
+
+            while (!_grid.RobotLost(_robot) && cmds.MoveNext())
+            {
+                switch (cmds.Current)
+                {
+                    case 'L':
+                        _robot.TurnLeft(); break;
+
+                    case 'R':
+                        _robot.TurnRight(); break;
+
+                    case 'F':
+                        //TODO: SCENT TEST
+                        _robot.MoveForward(); break;
+                }
+
+                if (showProgress) { RobotStatus(); }
+
+            }
+
+
+        }
+        private void RobotStatus() {
+            string formatterOutput = "{0} {1} {2} {3}";
+
+
+            Console.WriteLine(formatterOutput,
+                        _robot.location.x,
+                        _robot.location.y,
+                        _robot.orientation,
+                        _robot.isLost ? "LOST" : string.Empty);
+        }
+
+
     }
 }
