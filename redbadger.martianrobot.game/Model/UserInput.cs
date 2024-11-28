@@ -19,7 +19,18 @@ namespace redbadger.martianrobot.game.Model
 
         public UserInput(string[] userInputs)
         {
-            if (!ValidateGridInput(userInputs[0], out gridMaxCoords))
+            // lack of data
+            if (userInputs == null)
+            {
+                Console.WriteLine($"Invalid user input");
+            }
+            else if (userInputs.Length < 3)
+            {
+                Console.WriteLine($"Invalid user input");
+            }
+
+            // validate
+            else if (!ValidateGridInput(userInputs[0], out gridMaxCoords))
             {
                 Console.WriteLine($"Invalid grid coords: '{userInputs[0]}'");
             }
@@ -31,6 +42,8 @@ namespace redbadger.martianrobot.game.Model
             {
                 Console.WriteLine($"Invalid command sequence: '{userInputs[2]}'");
             }
+
+            // must be valid
             else { isValid = true; }
         }
 

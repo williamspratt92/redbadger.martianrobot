@@ -2,7 +2,7 @@ using redbadger.martianrobot.game.Model;
 
 namespace redbadger.martianrobot.tests
 {
-    public class UserInputTests
+    public class UserInputTests_Normal
     {
         [Fact]
         public void SampleInput_1()
