@@ -5,6 +5,8 @@ VisualStudioVersion = 17.11.35219.272
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redbadger.martianrobot.game", "redbadger.martianrobot.game\redbadger.martianrobot.game.csproj", "{20154092-4D9C-4CFD-A81F-36FBC0F0A21F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "redbadger.martianrobot.tests", "redbadger.martianrobot.tests\redbadger.martianrobot.tests.csproj", "{FC6C32A3-068F-49FF-8EE0-9DD60F0CC183}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{20154092-4D9C-4CFD-A81F-36FBC0F0A21F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{20154092-4D9C-4CFD-A81F-36FBC0F0A21F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{20154092-4D9C-4CFD-A81F-36FBC0F0A21F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC6C32A3-068F-49FF-8EE0-9DD60F0CC183}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC6C32A3-068F-49FF-8EE0-9DD60F0CC183}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC6C32A3-068F-49FF-8EE0-9DD60F0CC183}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC6C32A3-068F-49FF-8EE0-9DD60F0CC183}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
