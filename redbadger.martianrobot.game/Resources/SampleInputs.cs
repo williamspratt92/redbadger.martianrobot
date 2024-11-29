@@ -18,5 +18,6 @@ namespace redbadger.martianrobot.game.Resources
         public static readonly string sampleOutput1 = "1 1 E" ;
         public static readonly string sampleOutput2 = "3 3 N LOST";
         public static readonly string sampleOutput3 = "2 3 S";
+
     }
 }

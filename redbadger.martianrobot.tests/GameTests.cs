@@ -42,6 +42,13 @@ namespace redbadger.martianrobot.tests
                 SampleInputs.sampleOutput3,
                 gameService.NewRobot(new UserInput(SampleInputs.sampleInput3))
                 );
+            
+            // repeat sample 2
+            Assert.Equal(
+                "3 2 N",
+                gameService.NewRobot(new UserInput(SampleInputs.sampleInput2))
+                );
+            
         }
 
     }
