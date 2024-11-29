@@ -10,19 +10,25 @@ namespace redbadger.martianrobot.tests
         {
 
         }
-        public string GetOutput() { return base.RobotStatus(); }
+
+        public Grid grid { get { return base._grid; } }
     }
 
 
     public class GameTests
     {
         [Fact]
+        public void CreatesScent()
+        {
+            MockGameService gameService = new MockGameService(new Grid(SampleInputs.sampleGrid));
+            gameService.NewRobot(new UserInput(SampleInputs.sampleInput2));
+
+            Assert.True( gameService.grid.IsPositionScented(new Coord(3, 3)) );
+        }
+        [Fact]
         public void SampleInput()
         {
             MockGameService gameService = new MockGameService(new Grid(SampleInputs.sampleGrid));
-            gameService.NewRobot(new UserInput(SampleInputs.sampleInput1));
-            gameService.NewRobot(new UserInput(SampleInputs.sampleInput2));
-            gameService.NewRobot(new UserInput(SampleInputs.sampleInput3));
 
             Assert.Equal(
                 SampleInputs.sampleOutput1,

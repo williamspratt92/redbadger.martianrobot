@@ -53,21 +53,23 @@ namespace redbadger.martianrobot.game.Service
         {
             _scentedCoords.Add(coord);
         }
-        
+
+        // TODO: mkae less elegant and more easy to read
         public bool RobotOnGrid(Robot robot)
         {
-            bool onGrid = robot.location.x >= 0 
-                && robot.location.x <= _maxBounds.x
-                && robot.location.y >= 0
-                && robot.location.y <= _maxBounds.y
-                ;
-
-            if (!onGrid) {
+            if (!IsOnGrid(robot.location)) {
                 robot.RobotLost();
             }
 
-            return onGrid;
+            return !robot.isLost;
         }
-
+        public bool IsOnGrid(Coord location)
+        {
+            return location.x >= 0
+                && location.x <= _maxBounds.x
+                && location.y >= 0
+                && location.y <= _maxBounds.y
+                ;
+        }
     }
 }

@@ -7,16 +7,15 @@ namespace MyApp
 {
     internal class Program
     {
-        static GameService _gameService = new GameService(new Grid(string.Empty));
-
+        
         static void Main(string[] args)
         {
             Grid grid = new Grid(SampleInputs.sampleGrid);
-            _gameService = new GameService(grid);
+            GameService gameService = new GameService(grid);
 
-            Console.WriteLine(_gameService.NewRobot(new UserInput(SampleInputs.sampleInput1)));
-            Console.WriteLine(_gameService.NewRobot(new UserInput(SampleInputs.sampleInput2)));
-            Console.WriteLine(_gameService.NewRobot(new UserInput(SampleInputs.sampleInput3)));
+            Console.WriteLine(gameService.NewRobot(new UserInput(SampleInputs.sampleInput1)));
+            Console.WriteLine(gameService.NewRobot(new UserInput(SampleInputs.sampleInput2)));
+            Console.WriteLine(gameService.NewRobot(new UserInput(SampleInputs.sampleInput3)));
 
 
         }

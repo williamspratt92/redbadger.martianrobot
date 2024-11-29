@@ -39,6 +39,28 @@ namespace redbadger.martianrobot.game.Model
 
             }
         }
+        public Coord CalcMoveForward()
+        {
+            int xChange = 0;
+            int yChange = 0;
+
+
+            switch (_orientation)
+            {
+                case Orientation.North:
+                    yChange += 1; break;
+                case Orientation.South:
+                    yChange -= 1; break;
+
+                case Orientation.East:
+                    xChange += 1; break;
+                case Orientation.West:
+                    xChange -= 1; break;
+
+            }
+
+            return new Coord(_location.x + xChange, _location.y +yChange);
+        }
 
         public void TurnRight() {
 
