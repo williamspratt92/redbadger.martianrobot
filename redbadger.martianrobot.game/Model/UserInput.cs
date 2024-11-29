@@ -1,4 +1,5 @@
-﻿using System;
+﻿using redbadger.martianrobot.game.Enums;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Runtime.CompilerServices;
@@ -11,7 +12,7 @@ namespace redbadger.martianrobot.game.Model
 {
     internal struct UserInput
     {
-        //public readonly Coord gridMaxCoords;
+        
         public readonly Coord robotOriginalCoords;
         public readonly Orientation robotOriginalOrientation;
         public readonly char[] commands = Array.Empty<char>();

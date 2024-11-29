@@ -1,3 +1,4 @@
+using redbadger.martianrobot.game.Enums;
 using redbadger.martianrobot.game.Model;
 using redbadger.martianrobot.game.Service;
 
